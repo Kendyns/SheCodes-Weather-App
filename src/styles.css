@@ -48,7 +48,7 @@ p {
 .app {
   border: 2px solid black;
   margin: 20px;
-  padding: 30px;
+  padding: 30px 30px 5px 30px;
   background: #84a9ac;
   width: 760px;
   border-radius: 25px;
@@ -71,7 +71,7 @@ p {
   font-size: 28px;
   position: relative;
   top: -7px;
-  left: -18px;
+  left: -12px;
   transition: all 200ms ease-in-out;
 }
 .searchplace:hover {
@@ -135,4 +135,15 @@ p {
 .futWea {
   font-size: 50px;
   padding: 0 0 16px 0;
+}
+.openSourced {
+  margin: 10px 0px 5px 0px;
+  font-size: 15px;
+}
+.link {
+  color: #e4e3e3;
+}
+.link:hover {
+  text-decoration: none;
+  color: #e4e3e3;
 }
