@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>☀ What in the Weather 🌧</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald&family=Questrial&family=Ubuntu:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/7d887ccc4d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="app">
+        <form id="location-search">
+          <input
+            type="text"
+            class="search"
+            id="location-input"
+            placeholder="Search for Location"
+            autofocus="off"
+            autocomplete="off"
+          />
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button
+              type="submit"
+              id="search-button"
+              class="btn btn-secondary searchplace"
+            >
+              <i class="fas fa-search-location"></i>
+            </button>
+            <button
+              type="button"
+              id="your-city"
+              class="btn btn-secondary searchplace"
+            >
+              <i class="fas fa-map-marker-alt"></i>
+            </button>
+          </div>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary degree cel">
+              °C
+            </button>
+            <button type="button" class="btn btn-secondary degree far">
+              °F
+            </button>
+          </div>
+        </form>
+        <div class="row info">
+          <div class="col-5">
+            <h2 class="city">Calgary</h2>
+            <h4 class="date">
+              <span class="today">Wednesday</span>
+              <span class="hour">11</span>:<span class="minutes">02</span>
+              <span class="afternoon">am</span>
+            </h4>
+            <h5>
+              Pretty much the perfect day. You'd be crazy not to go outside.
+            </h5>
+          </div>
+          <div class="col-3 middle">
+            <h1 class="temp0"><span class="curr0">18</span>°C</h1>
+            <span class="weather">
+              <h3 class="condition">Sunny</h3>
+              <h6>Wind: <span class="wind">4</span> km/hr</h6>
+              <h6>Humidity: <span class="humidity">4</span>%</h6>
+            </span>
+          </div>
+          <div class="col-3">
+            <i class="fas fa-sun"></i>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col">
+            <p class="day1">Thursday</p>
+            <i class="fas fa-cloud futWea"></i>
+            <h4 class="future temp1">15°C</h4>
+          </div>
+          <div class="col">
+            <p class="day2">Friday</p>
+            <i class="fas fa-poo-storm futWea"></i>
+            <h4 class="future temp2">27°C</h4>
+          </div>
+          <div class="col">
+            <p class="day3">Saturday</p>
+            <i class="fas fa-cloud-sun-rain futWea"></i>
+            <h4 class="future temp3">20°C</h4>
+          </div>
+          <div class="col">
+            <p class="day4">Sunday</p>
+            <i class="fas fa-cloud-sun futWea"></i>
+            <h4 class="future temp4">19°C</h4>
+          </div>
+          <div class="col">
+            <p class="day5">Monday</p>
+            <i class="fas fa-cloud futWea"></i>
+            <h4 class="future temp5">15°C</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>

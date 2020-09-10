@@ -1,0 +1,138 @@
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+h1,
+h2,
+p {
+  color: #204051;
+}
+h3,
+h4,
+h5,
+h6 {
+  color: #3b6978;
+}
+hr {
+  border-top: 2px solid #204051;
+}
+h1 {
+  font-size: 100px;
+  margin: 0;
+  font-weight: 700;
+}
+h2 {
+  font-size: 50px;
+  padding: 0 0 0px 0;
+  font-weight: 700;
+}
+h3 {
+  font-size: 40px;
+  font-weight: 600;
+}
+h4 {
+  font-size: 26px;
+}
+h5 {
+  font-style: italic;
+  font-family: "Questrial", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #e4e3e3;
+}
+h6 {
+  font-size: 18px;
+}
+p {
+  font-size: 29px;
+}
+.app {
+  border: 2px solid black;
+  margin: 20px;
+  padding: 30px;
+  background: #84a9ac;
+  width: 760px;
+  border-radius: 25px;
+}
+.search {
+  color: #204051;
+  background: #e4e3e3;
+  border-radius: 10px;
+  border-color: #3b6978;
+  width: 400px;
+  line-height: 40px;
+  font-size: 30px;
+  font-weight: 400;
+}
+.searchplace {
+  background-color: #3b6978;
+  border-color: #3b6978;
+  color: #e4e3e3;
+  line-height: 32px;
+  font-size: 28px;
+  position: relative;
+  top: -7px;
+  left: -18px;
+  transition: all 200ms ease-in-out;
+}
+.searchplace:hover {
+  background: #204051;
+  cursor: pointer;
+}
+.degree {
+  background-color: #204051;
+  border-color: #3b6978;
+  color: #e4e3e3;
+  line-height: 37px;
+  font-size: 31px;
+  width: 59px;
+  position: relative;
+  top: -5px;
+  right: -70px;
+  transition: all 200ms ease-in-out;
+}
+.degree:hover {
+  background: #3b6978;
+  border-color: #204051;
+  cursor: pointer;
+}
+.info {
+  margin: 10px 0px 28px 0px;
+}
+.col {
+  text-align: center;
+}
+.future {
+  color: #204051;
+  font: 29px;
+}
+.date {
+  padding: 0 0 27px 0;
+}
+.middle {
+  text-align: right;
+  position: relative;
+  top: 12px;
+  right: 10px;
+}
+.weather {
+  position: relative;
+  top: -5px;
+  right: -58px;
+}
+.fas {
+  color: #e4e3e3;
+}
+.fa-sun {
+  color: #204051;
+  font-size: 170px;
+  position: relative;
+  top: 43px;
+  left: 47px;
+}
+.cel {
+  background-color: #3b6978;
+}
+.futWea {
+  font-size: 50px;
+  padding: 0 0 16px 0;
+}
