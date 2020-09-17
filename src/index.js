@@ -151,3 +151,15 @@ placeLocation.addEventListener("keypress", function (e) {
     findCity(event);
   }
 });
+// Things to do
+
+// Make the default your location when you go on to page
+// Capitalize WEather Condition First Letter
+// Update Date/Time for city Time zone
+// Cel and farienheight temp change
+// muliday forecasting
+//main icon change
+// forecasting icon cahnge
+// Buttons go grey after clicking - make that go away
+// Javascript for weather saying
+// descritpion - make left justified
