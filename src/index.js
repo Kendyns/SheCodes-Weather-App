@@ -1,38 +1,3 @@
-// Current Date
-let now = new Date();
-console.log(now);
-
-// Day of Week
-let daily = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let newToday = daily[now.getDay()];
-
-// Change Days
-
-let today = document.querySelector(".today");
-today.innerHTML = newToday;
-
-//next 5 Days
-for (let i = 1; i < 6; i++) {
-  let dayOfW = now.getDay() + i;
-  let dayNumber = ".day" + String(i);
-  let currentDay = document.querySelector(dayNumber);
-  currentDay.innerHTML = daily[dayOfW];
-}
 // Change Time
 function correctMinutes(i) {
   if (i < 10) {
@@ -40,22 +5,6 @@ function correctMinutes(i) {
   }
   return i;
 }
-let hour = document.querySelector(".hour");
-let minute = document.querySelector(".minutes");
-let pm = document.querySelector(".afternoon");
-let largeTime = now.getHours();
-let afternoon = "am";
-if (largeTime > 11) {
-  afternoon = "pm";
-}
-if (largeTime > 12) {
-  largeTime = largeTime - 12;
-}
-hour.innerHTML = largeTime;
-let minutes = now.getMinutes();
-minute.innerHTML = correctMinutes(minutes);
-pm.innerHTML = afternoon;
-
 // Change to Fahrenheit
 function toFar() {
   let temper0 = document.querySelector(".temp0");
@@ -70,6 +19,8 @@ function toFar() {
   temper4.innerHTML = 66 + "°F";
   let temper5 = document.querySelector(".temp5");
   temper5.innerHTML = 59 + "°F";
+  let windUnits = document.querySelector(".units");
+  windUnits.innerHTML = " mph";
 }
 // Change to Celcius
 function toCel() {
@@ -85,12 +36,28 @@ function toCel() {
   temper4.innerHTML = 19 + "°C";
   let temper5 = document.querySelector(".temp5");
   temper5.innerHTML = 15 + "°C";
+  let windUnits = document.querySelector(".units");
+  windUnits.innerHTML = " km/hr";
 }
-let changeToF = document.querySelector(".far");
-changeToF.addEventListener("click", toFar);
-let changetoC = document.querySelector(".cel");
-changetoC.addEventListener("click", toCel);
-
+// Change City
+function findCity(event) {
+  event.preventDefault();
+  let input = document.querySelector("#location-input");
+  let newPlace = document.querySelector(".city");
+  let citySearch = input.value;
+  newPlace.innerHTML = citySearch;
+  input.value = "";
+  weatherLookup(citySearch);
+}
+let apiKey = "2101a412798b548bf7cc6d35c64d3994";
+let locationPlace = document.querySelector("#location-search");
+locationPlace.addEventListener("submit", findCity);
+let placeLocation = document.querySelector("#location-input");
+placeLocation.addEventListener("keypress", function (e) {
+  if (e.keyCode === 13) {
+    findCity(event);
+  }
+});
 //Change Weather
 function changeWeather(name, temp, humid, conditions, windS) {
   temp = Math.round(temp);
@@ -128,31 +95,70 @@ function showPosition(position) {
 function yourCity() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
+// Current Date
+let now = new Date();
+console.log(now);
+
+// Day of Week
+let daily = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+let newToday = daily[now.getDay()];
+
+// Change Days
+let today = document.querySelector(".today");
+today.innerHTML = newToday;
+
+//next 5 Days
+for (let i = 1; i < 6; i++) {
+  let dayOfW = now.getDay() + i;
+  let dayNumber = ".day" + String(i);
+  let currentDay = document.querySelector(dayNumber);
+  currentDay.innerHTML = daily[dayOfW];
+}
+let hour = document.querySelector(".hour");
+let minute = document.querySelector(".minutes");
+let pm = document.querySelector(".afternoon");
+let largeTime = now.getHours();
+let afternoon = "am";
+if (largeTime > 11) {
+  afternoon = "pm";
+}
+if (largeTime > 12) {
+  largeTime = largeTime - 12;
+}
+hour.innerHTML = largeTime;
+let minutes = now.getMinutes();
+minute.innerHTML = correctMinutes(minutes);
+pm.innerHTML = afternoon;
+
+let changeToF = document.querySelector(".far");
+changeToF.addEventListener("click", toFar);
+let changetoC = document.querySelector(".cel");
+changetoC.addEventListener("click", toCel);
+
 let yourCurrentCity = document.querySelector("#your-city");
 yourCurrentCity.addEventListener("click", yourCity);
-//navigator.geolocation.getCurrentPosition(showPosition);
 
-// Change City
-function findCity(event) {
-  event.preventDefault();
-  let input = document.querySelector("#location-input");
-  let newPlace = document.querySelector(".city");
-  let citySearch = input.value;
-  newPlace.innerHTML = citySearch;
-  input.value = "";
-  weatherLookup(citySearch);
-}
-let apiKey = "2101a412798b548bf7cc6d35c64d3994";
-let locationPlace = document.querySelector("#location-search");
-locationPlace.addEventListener("submit", findCity);
-let placeLocation = document.querySelector("#location-input");
-placeLocation.addEventListener("keypress", function (e) {
-  if (e.keyCode === 13) {
-    findCity(event);
-  }
-});
+navigator.geolocation.getCurrentPosition(showPosition);
+weatherLookup("Calgary");
+
 // Things to do
 
+// Pass the default city of Calgary if location isn't shown
 // Make the default your location when you go on to page
 // Capitalize WEather Condition First Letter
 // Update Date/Time for city Time zone
