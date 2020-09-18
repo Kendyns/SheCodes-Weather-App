@@ -5,6 +5,15 @@ function correctMinutes(i) {
   }
   return i;
 }
+//Change Active Button Colours
+function CelActiveButton() {
+  document.getElementById("cel").style.backgroundColor = "#3b6978";
+  document.getElementById("far").style.backgroundColor = "#204051";
+}
+function FarActiveButton() {
+  document.getElementById("cel").style.backgroundColor = "#204051";
+  document.getElementById("far").style.backgroundColor = "#3b6978";
+}
 // Change to Fahrenheit
 function toFar() {
   let temper0 = document.querySelector(".temp0");
@@ -21,6 +30,7 @@ function toFar() {
   temper5.innerHTML = 59 + "°F";
   let windUnits = document.querySelector(".units");
   windUnits.innerHTML = " mph";
+  FarActiveButton();
 }
 // Change to Celcius
 function toCel() {
@@ -38,6 +48,7 @@ function toCel() {
   temper5.innerHTML = 15 + "°C";
   let windUnits = document.querySelector(".units");
   windUnits.innerHTML = " km/hr";
+  CelActiveButton();
 }
 // Change City
 function findCity(event) {
@@ -47,6 +58,7 @@ function findCity(event) {
   let citySearch = input.value;
   newPlace.innerHTML = citySearch;
   input.value = "";
+  document.getElementById("search-button").style.backgroundColor = "#3b6978";
   weatherLookup(citySearch);
 }
 let apiKey = "2101a412798b548bf7cc6d35c64d3994";
@@ -93,6 +105,7 @@ function showPosition(position) {
   axios.get(url).then(currentWeather);
 }
 function yourCity() {
+  document.getElementById("your-city").style.backgroundColor = "#3b6978";
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 // Current Date
@@ -158,14 +171,10 @@ weatherLookup("Calgary");
 
 // Things to do
 
-// Pass the default city of Calgary if location isn't shown
-// Make the default your location when you go on to page
-// Capitalize WEather Condition First Letter
 // Update Date/Time for city Time zone
 // Cel and farienheight temp change
-// muliday forecasting
+// multiday forecasting
 //main icon change
 // forecasting icon cahnge
-// Buttons go grey after clicking - make that go away
 // Javascript for weather saying
 // descritpion - make left justified

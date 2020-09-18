@@ -10,7 +10,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #3b6978;
+  color: rgb(59, 105, 120);
 }
 hr {
   border-top: 2px solid #204051;
@@ -44,6 +44,9 @@ h6 {
 }
 p {
   font-size: 29px;
+}
+button {
+  outline: 0;
 }
 .app {
   border: 2px solid black;
@@ -147,4 +150,7 @@ p {
 .link:hover {
   text-decoration: none;
   color: #e4e3e3;
+}
+.condition::first-letter {
+  text-transform: capitalize;
 }
