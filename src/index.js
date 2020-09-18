@@ -16,36 +16,22 @@ function FarActiveButton() {
 }
 // Change to Fahrenheit
 function toFar() {
-  let temper0 = document.querySelector(".temp0");
-  temper0.innerHTML = 64 + "°F";
-  let temper1 = document.querySelector(".temp1");
-  temper1.innerHTML = 59 + "°F";
-  let temper2 = document.querySelector(".temp2");
-  temper2.innerHTML = 81 + "°F";
-  let temper3 = document.querySelector(".temp3");
-  temper3.innerHTML = 68 + "°F";
-  let temper4 = document.querySelector(".temp4");
-  temper4.innerHTML = 66 + "°F";
-  let temper5 = document.querySelector(".temp5");
-  temper5.innerHTML = 59 + "°F";
+  for (let i = 0; i < 6; i++) {
+    let tempNumber = ".temp" + String(i);
+    let temper = document.querySelector(tempNumber);
+    temper.innerHTML = 64 + "°F";
+  }
   let windUnits = document.querySelector(".units");
   windUnits.innerHTML = " mph";
   FarActiveButton();
 }
 // Change to Celcius
 function toCel() {
-  let temper0 = document.querySelector(".temp0");
-  temper0.innerHTML = 18 + "°C";
-  let temper1 = document.querySelector(".temp1");
-  temper1.innerHTML = 15 + "°C";
-  let temper2 = document.querySelector(".temp2");
-  temper2.innerHTML = 27 + "°C";
-  let temper3 = document.querySelector(".temp3");
-  temper3.innerHTML = 20 + "°C";
-  let temper4 = document.querySelector(".temp4");
-  temper4.innerHTML = 19 + "°C";
-  let temper5 = document.querySelector(".temp5");
-  temper5.innerHTML = 15 + "°C";
+  for (let i = 0; i < 6; i++) {
+    let tempNumber = ".temp" + String(i);
+    let temper = document.querySelector(tempNumber);
+    temper.innerHTML = 20 + "°C";
+  }
   let windUnits = document.querySelector(".units");
   windUnits.innerHTML = " km/hr";
   CelActiveButton();
@@ -172,9 +158,9 @@ weatherLookup("Calgary");
 // Things to do
 
 // Update Date/Time for city Time zone
-// Cel and farienheight temp change
 // multiday forecasting
 //main icon change
 // forecasting icon cahnge
 // Javascript for weather saying
 // descritpion - make left justified
+// make function for determining which oF or oC is active
