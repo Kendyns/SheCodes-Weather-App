@@ -18,8 +18,7 @@ function FarActiveButton() {
 function toFar() {
   for (let i = 0; i < 6; i++) {
     let tempNumber = ".temp" + String(i);
-    let value = 20;
-    let convertF = value * 1.8 + 32;
+    let convertF = temperatures[i] * 1.8 + 32;
     let temper = document.querySelector(tempNumber);
     temper.innerHTML = Math.round(convertF) + "°F";
   }
@@ -31,9 +30,8 @@ function toFar() {
 function toCel() {
   for (let i = 0; i < 6; i++) {
     let tempNumber = ".temp" + String(i);
+    let convertC = temperatures[i];
     let temper = document.querySelector(tempNumber);
-    let value = 64;
-    let convertC = (value - 32) / 1.8;
     temper.innerHTML = Math.round(convertC) + "°C";
   }
   let windUnits = document.querySelector(".units");
@@ -77,11 +75,11 @@ function changeWeather(name, temp, humid, conditions, windS) {
 }
 function currentWeather(response) {
   let cityName = response.data.name;
-  let temp0 = response.data.main.temp;
+  temperatures[0] = response.data.main.temp;
   let humid = response.data.main.humidity;
   let outsideView = response.data.weather[0].description;
   let windSpeed = response.data.wind.speed;
-  changeWeather(cityName, temp0, humid, outsideView, windSpeed);
+  changeWeather(cityName, temperatures[0], humid, outsideView, windSpeed);
 }
 
 function weatherLookup(city) {
@@ -150,6 +148,10 @@ let minutes = now.getMinutes();
 minute.innerHTML = correctMinutes(minutes);
 pm.innerHTML = afternoon;
 
+//null temp values
+let temperatures = [12, 11, 15, 18, 19, 32];
+let temp0 = null;
+
 let changeToF = document.querySelector(".far");
 changeToF.addEventListener("click", toFar);
 let changetoC = document.querySelector(".cel");
@@ -169,4 +171,4 @@ weatherLookup("Calgary");
 // forecasting icon cahnge
 // Javascript for weather saying
 // descritpion - make left justified
-// make function for determining which oF or oC is active
+// make function for determining which oF or oC is active --- make it so the innerHTMLs are seperate, otherwise not working
