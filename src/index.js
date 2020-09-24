@@ -18,8 +18,10 @@ function FarActiveButton() {
 function toFar() {
   for (let i = 0; i < 6; i++) {
     let tempNumber = ".temp" + String(i);
+    let value = 20;
+    let convertF = value * 1.8 + 32;
     let temper = document.querySelector(tempNumber);
-    temper.innerHTML = 64 + "°F";
+    temper.innerHTML = Math.round(convertF) + "°F";
   }
   let windUnits = document.querySelector(".units");
   windUnits.innerHTML = " mph";
@@ -30,7 +32,9 @@ function toCel() {
   for (let i = 0; i < 6; i++) {
     let tempNumber = ".temp" + String(i);
     let temper = document.querySelector(tempNumber);
-    temper.innerHTML = 20 + "°C";
+    let value = 64;
+    let convertC = (value - 32) / 1.8;
+    temper.innerHTML = Math.round(convertC) + "°C";
   }
   let windUnits = document.querySelector(".units");
   windUnits.innerHTML = " km/hr";
@@ -82,12 +86,14 @@ function currentWeather(response) {
 
 function weatherLookup(city) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let urldays = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(url).then(currentWeather);
 }
 function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  let urldays = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric'`;
   axios.get(url).then(currentWeather);
 }
 function yourCity() {
