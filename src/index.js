@@ -23,7 +23,8 @@ function toFar() {
     temper.innerHTML = Math.round(convertF) + "°F";
   }
   let windUnits = document.querySelector(".units");
-  windUnits.innerHTML = " mph";
+  let milesPH = windSpeed / 1.609;
+  windUnits.innerHTML = Math.round(milesPH) + " mph";
   FarActiveButton();
 }
 // Change to Celcius
@@ -35,7 +36,7 @@ function toCel() {
     temper.innerHTML = Math.round(convertC) + "°C";
   }
   let windUnits = document.querySelector(".units");
-  windUnits.innerHTML = " km/hr";
+  windUnits.innerHTML = Math.round(windSpeed) + " km/hr";
   CelActiveButton();
 }
 // Change City
@@ -51,13 +52,6 @@ function findCity(event) {
 }
 let apiKey = "2101a412798b548bf7cc6d35c64d3994";
 let locationPlace = document.querySelector("#location-search");
-locationPlace.addEventListener("submit", findCity);
-let placeLocation = document.querySelector("#location-input");
-placeLocation.addEventListener("keypress", function (e) {
-  if (e.keyCode === 13) {
-    findCity(event);
-  }
-});
 //Change Weather
 function changeWeather(name, temp, humid, conditions, windS) {
   temp = Math.round(temp);
@@ -73,13 +67,59 @@ function changeWeather(name, temp, humid, conditions, windS) {
   let currentWind = document.querySelector(".wind");
   currentWind.innerHTML = windS;
 }
+function cityTime(time) {
+  console.log(time);
+  let cityTime = new Date(time * 1000);
+
+  // Day of Week
+  let daily = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let newToday = daily[cityTime.getDay()];
+  // Change Days
+  let today = document.querySelector(".today");
+  today.innerHTML = newToday;
+  //next 5 Days
+  for (let i = 1; i < 6; i++) {
+    let dayOfW = cityTime.getDay() + i;
+    let dayNumber = ".day" + String(i);
+    let currentDay = document.querySelector(dayNumber);
+    if (dayOfW > 6) {
+      dayOfW = dayOfW - 7;
+    }
+    currentDay.innerHTML = daily[dayOfW];
+  }
+  let hour = document.querySelector(".hour");
+  let minute = document.querySelector(".minutes");
+  let pm = document.querySelector(".afternoon");
+  let largeTime = cityTime.getHours();
+  let afternoon = "am";
+  if (largeTime > 11) {
+    afternoon = "pm";
+  }
+  if (largeTime > 12) {
+    largeTime = largeTime - 12;
+  }
+  hour.innerHTML = largeTime;
+  let minutes = cityTime.getMinutes();
+  minute.innerHTML = correctMinutes(minutes);
+  pm.innerHTML = afternoon;
+}
 function currentWeather(response) {
   let cityName = response.data.name;
   temperatures[0] = response.data.main.temp;
   let humid = response.data.main.humidity;
   let outsideView = response.data.weather[0].description;
-  let windSpeed = response.data.wind.speed;
+  windSpeed = response.data.wind.speed;
+  timestamp = response.data.dt;
   changeWeather(cityName, temperatures[0], humid, outsideView, windSpeed);
+  cityTime(timestamp);
 }
 
 function weatherLookup(city) {
@@ -99,58 +139,11 @@ function yourCity() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 // Current Date
-let now = new Date();
-console.log(now);
-
-// Day of Week
-let daily = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let newToday = daily[now.getDay()];
-
-// Change Days
-let today = document.querySelector(".today");
-today.innerHTML = newToday;
-
-//next 5 Days
-for (let i = 1; i < 6; i++) {
-  let dayOfW = now.getDay() + i;
-  let dayNumber = ".day" + String(i);
-  let currentDay = document.querySelector(dayNumber);
-  currentDay.innerHTML = daily[dayOfW];
-}
-let hour = document.querySelector(".hour");
-let minute = document.querySelector(".minutes");
-let pm = document.querySelector(".afternoon");
-let largeTime = now.getHours();
-let afternoon = "am";
-if (largeTime > 11) {
-  afternoon = "pm";
-}
-if (largeTime > 12) {
-  largeTime = largeTime - 12;
-}
-hour.innerHTML = largeTime;
-let minutes = now.getMinutes();
-minute.innerHTML = correctMinutes(minutes);
-pm.innerHTML = afternoon;
+let timestamp = null;
 
 //null temp values
-let temperatures = [12, 11, 15, 18, 19, 32];
-let temp0 = null;
+let temperatures = [null, 11, 15, 18, 19, 32];
+let windSpeed = null;
 
 let changeToF = document.querySelector(".far");
 changeToF.addEventListener("click", toFar);
@@ -161,7 +154,14 @@ let yourCurrentCity = document.querySelector("#your-city");
 yourCurrentCity.addEventListener("click", yourCity);
 
 navigator.geolocation.getCurrentPosition(showPosition);
-weatherLookup("Calgary");
+weatherLookup("Toronto");
+locationPlace.addEventListener("submit", findCity);
+let placeLocation = document.querySelector("#location-input");
+placeLocation.addEventListener("keypress", function (e) {
+  if (e.keyCode === 13) {
+    findCity(event);
+  }
+});
 
 // Things to do
 
@@ -171,4 +171,3 @@ weatherLookup("Calgary");
 // forecasting icon cahnge
 // Javascript for weather saying
 // descritpion - make left justified
-// make function for determining which oF or oC is active --- make it so the innerHTMLs are seperate, otherwise not working
