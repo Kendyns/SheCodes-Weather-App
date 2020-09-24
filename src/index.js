@@ -68,7 +68,6 @@ function changeWeather(name, temp, humid, conditions, windS) {
   currentWind.innerHTML = windS;
 }
 function cityTime(time) {
-  console.log(time);
   let cityTime = new Date(time * 1000);
 
   // Day of Week
@@ -121,11 +120,35 @@ function currentWeather(response) {
   changeWeather(cityName, temperatures[0], humid, outsideView, windSpeed);
   cityTime(timestamp);
 }
-
+function multiForecast(response) {
+  let currentTime = response.data.list[0].dt;
+  console.log(response);
+  let multiTime = new Date(currentTime * 1000);
+  let currentHour = multiTime.getHours();
+  if (currentHour === 15) {
+    MultiIndex1 = 8;
+  } else {
+    if (currentHour > 15) {
+      let MultiDayHours = (currentHour - 15) / 3;
+      MultiIndex1 = 8 - MultiDayHours;
+    } else {
+      let MiniDayHours = (15 - currentHour) / 3;
+      MultiIndex1 = 8 + MiniDayHours;
+    }
+    // Make my Incidices
+  }
+  MultiIndex2 = MultiIndex1 + 8;
+  MultiIndex3 = MultiIndex1 + 16;
+  console.log(MultiIndex3);
+  MultiIndex4 = MultiIndex1 + 24;
+  MultiIndex5 = MultiIndex1 + 32;
+  console.log(response.data.list[MultiIndex3].main.temp_max);
+}
 function weatherLookup(city) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   let urldays = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(url).then(currentWeather);
+  axios.get(urldays).then(multiForecast);
 }
 function showPosition(position) {
   let lat = position.coords.latitude;
@@ -133,6 +156,7 @@ function showPosition(position) {
   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   let urldays = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric'`;
   axios.get(url).then(currentWeather);
+  axios.get(urldays).then(multiForecast);
 }
 function yourCity() {
   document.getElementById("your-city").style.backgroundColor = "#3b6978";
@@ -140,6 +164,7 @@ function yourCity() {
 }
 // Current Date
 let timestamp = null;
+let recentTime = null;
 
 //null temp values
 let temperatures = [null, 11, 15, 18, 19, 32];
