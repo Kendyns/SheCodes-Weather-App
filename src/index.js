@@ -120,29 +120,44 @@ function currentWeather(response) {
   changeWeather(cityName, temperatures[0], humid, outsideView, windSpeed);
   cityTime(timestamp);
 }
+function changeDailyFore(temperatures) {
+  for (let j = 1; j < 6; j++) {
+    let futureDay = ".temp" + String(j);
+    let highlightDay = document.querySelector(futureDay);
+    highlightDay.innerHTML = Math.round(temperatures[j]) + "°C";
+  }
+}
 function multiForecast(response) {
   let currentTime = response.data.list[0].dt;
-  console.log(response);
   let multiTime = new Date(currentTime * 1000);
   let currentHour = multiTime.getHours();
   if (currentHour === 15) {
-    MultiIndex1 = 8;
+    mI1 = 8;
   } else {
     if (currentHour > 15) {
       let MultiDayHours = (currentHour - 15) / 3;
-      MultiIndex1 = 8 - MultiDayHours;
+      mI1 = 8 - MultiDayHours;
     } else {
       let MiniDayHours = (15 - currentHour) / 3;
-      MultiIndex1 = 8 + MiniDayHours;
+      mI1 = 8 + MiniDayHours;
     }
-    // Make my Incidices
   }
-  MultiIndex2 = MultiIndex1 + 8;
-  MultiIndex3 = MultiIndex1 + 16;
-  console.log(MultiIndex3);
-  MultiIndex4 = MultiIndex1 + 24;
-  MultiIndex5 = MultiIndex1 + 32;
-  console.log(response.data.list[MultiIndex3].main.temp_max);
+  // Make my Incidices
+  mI2 = mI1 + 8;
+  mI3 = mI1 + 16;
+  mI4 = mI1 + 24;
+  if (mI1 + 32 > 39) {
+    mI5 = 39;
+  } else {
+    mI5 = mI1 + 32;
+  }
+
+  temperatures[1] = response.data.list[mI1].main.temp_max;
+  temperatures[2] = response.data.list[mI2].main.temp_max;
+  temperatures[3] = response.data.list[mI3].main.temp_max;
+  temperatures[4] = response.data.list[mI4].main.temp_max;
+  temperatures[5] = response.data.list[mI5].main.temp_max;
+  changeDailyFore(temperatures);
 }
 function weatherLookup(city) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -154,7 +169,7 @@ function showPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-  let urldays = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric'`;
+  let urldays = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   axios.get(url).then(currentWeather);
   axios.get(urldays).then(multiForecast);
 }
@@ -164,7 +179,6 @@ function yourCity() {
 }
 // Current Date
 let timestamp = null;
-let recentTime = null;
 
 //null temp values
 let temperatures = [null, 11, 15, 18, 19, 32];
@@ -179,7 +193,7 @@ let yourCurrentCity = document.querySelector("#your-city");
 yourCurrentCity.addEventListener("click", yourCity);
 
 navigator.geolocation.getCurrentPosition(showPosition);
-weatherLookup("Toronto");
+weatherLookup("Calgary");
 locationPlace.addEventListener("submit", findCity);
 let placeLocation = document.querySelector("#location-input");
 placeLocation.addEventListener("keypress", function (e) {
@@ -191,8 +205,6 @@ placeLocation.addEventListener("keypress", function (e) {
 // Things to do
 
 // Update Date/Time for city Time zone
-// multiday forecasting
 //main icon change
-// forecasting icon cahnge
+// forecasting icon change
 // Javascript for weather saying
-// descritpion - make left justified
