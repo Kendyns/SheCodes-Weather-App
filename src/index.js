@@ -53,19 +53,21 @@ function findCity(event) {
 let apiKey = "2101a412798b548bf7cc6d35c64d3994";
 let locationPlace = document.querySelector("#location-search");
 //Change Weather
-function changeWeather(name, temp, humid, conditions, windS) {
+function changeWeather(name, temp, humid, conditions, windS, weatherPic) {
   temp = Math.round(temp);
   windS = Math.round(windS);
   let place = document.querySelector(".city");
   place.innerHTML = name;
-  let todayTemp = document.querySelector(".curr0");
-  todayTemp.innerHTML = temp;
+  let todayTemp = document.querySelector(".temp0");
+  todayTemp.innerHTML = temp + "°C";
   let currentHum = document.querySelector(".humidity");
   currentHum.innerHTML = humid;
   let outside = document.querySelector(".condition");
   outside.innerHTML = conditions;
-  let currentWind = document.querySelector(".wind");
-  currentWind.innerHTML = windS;
+  let currentWind = document.querySelector(".units");
+  currentWind.innerHTML = windS + " km/hr";
+  let currentPic = document.querySelector("#main-icon");
+  currentPic.setAttribute("src", `src/images/${weatherPic}.svg`);
 }
 function cityTime(time) {
   let cityTime = new Date(time * 1000);
@@ -117,7 +119,15 @@ function currentWeather(response) {
   let outsideView = response.data.weather[0].description;
   windSpeed = response.data.wind.speed;
   timestamp = response.data.dt;
-  changeWeather(cityName, temperatures[0], humid, outsideView, windSpeed);
+  let weatherPic = response.data.weather[0].icon;
+  changeWeather(
+    cityName,
+    temperatures[0],
+    humid,
+    outsideView,
+    windSpeed,
+    weatherPic
+  );
   cityTime(timestamp);
 }
 function changeDailyFore(temperatures) {

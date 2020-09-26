@@ -19,6 +19,8 @@ h1 {
   font-size: 100px;
   margin: 0;
   font-weight: 700;
+  position: relative;
+  left: 15px;
 }
 h2 {
   font-size: 50px;
@@ -115,10 +117,12 @@ button {
 .date {
   padding: 0 0 27px 0;
 }
-.middle {
+.middle,
+.end {
   text-align: right;
+}
+.middle {
   position: relative;
-  top: 20px;
   right: 20px;
 }
 .weather {
@@ -126,15 +130,17 @@ button {
   top: -5px;
   right: -58px;
 }
-.fas {
-  color: #e4e3e3;
-}
-.fa-sun {
+.main-icon {
   color: #204051;
-  font-size: 170px;
+  font-size: 150px;
   position: relative;
   top: 43px;
   left: 47px;
+  fill: #204051;
+}
+.filterIcon {
+  filter: invert(17%) sepia(76%) saturate(405%) hue-rotate(157deg)
+    brightness(94%) contrast(88%);
 }
 .cel {
   background-color: #3b6978;
@@ -142,6 +148,7 @@ button {
 .futWea {
   font-size: 50px;
   padding: 0 0 16px 0;
+  color: #e4e3e3;
 }
 .openSourced {
   margin: 10px 0px 5px 0px;
