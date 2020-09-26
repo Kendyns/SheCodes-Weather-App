@@ -146,9 +146,14 @@ button {
   background-color: #3b6978;
 }
 .futWea {
-  font-size: 50px;
   padding: 0 0 16px 0;
   color: #e4e3e3;
+  position: relative;
+  bottom: 10px;
+}
+.future-icon {
+  filter: invert(99%) sepia(0%) saturate(2066%) hue-rotate(209deg)
+    brightness(118%) contrast(78%);
 }
 .openSourced {
   margin: 10px 0px 5px 0px;

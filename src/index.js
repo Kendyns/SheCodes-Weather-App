@@ -130,9 +130,12 @@ function currentWeather(response) {
   );
   cityTime(timestamp);
 }
-function changeDailyFore(temperatures) {
+function changeDailyFore(temperatures, weatherIDs) {
   for (let j = 1; j < 6; j++) {
     let futureDay = ".temp" + String(j);
+    let futureIcon = "#iconday" + String(j);
+    let futurePic = document.querySelector(futureIcon);
+    futurePic.setAttribute("src", `src/images/${weatherIDs[j]}.svg`);
     let highlightDay = document.querySelector(futureDay);
     highlightDay.innerHTML = Math.round(temperatures[j]) + "°C";
   }
@@ -167,7 +170,12 @@ function multiForecast(response) {
   temperatures[3] = response.data.list[mI3].main.temp_max;
   temperatures[4] = response.data.list[mI4].main.temp_max;
   temperatures[5] = response.data.list[mI5].main.temp_max;
-  changeDailyFore(temperatures);
+  weatherIDs[1] = response.data.list[mI1].weather[0].icon;
+  weatherIDs[2] = response.data.list[mI2].weather[0].icon;
+  weatherIDs[3] = response.data.list[mI3].weather[0].icon;
+  weatherIDs[4] = response.data.list[mI4].weather[0].icon;
+  weatherIDs[5] = response.data.list[mI5].weather[0].icon;
+  changeDailyFore(temperatures, weatherIDs);
 }
 function weatherLookup(city) {
   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -192,6 +200,7 @@ let timestamp = null;
 
 //null temp values
 let temperatures = [null, 11, 15, 18, 19, 32];
+let weatherIDs = [null, 11, 12, 13, 14, 15];
 let windSpeed = null;
 
 let changeToF = document.querySelector(".far");
