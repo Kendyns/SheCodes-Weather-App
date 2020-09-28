@@ -225,8 +225,3 @@ placeLocation.addEventListener("keypress", function (e) {
     findCity(event);
   }
 });
-
-// Things to do
-
-// Update Date/Time for city Time zone
-// Javascript for weather saying
