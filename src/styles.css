@@ -20,7 +20,7 @@ h1 {
   margin: 0;
   font-weight: 700;
   position: relative;
-  left: 15px;
+  left: 54px;
 }
 h2 {
   font-size: 50px;
@@ -28,13 +28,13 @@ h2 {
   font-weight: 700;
 }
 h3 {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 600;
   position: relative;
   left: 2px;
 }
 h4 {
-  font-size: 29px;
+  font-size: 35px;
 }
 h5 {
   font-style: italic;
@@ -105,7 +105,7 @@ button {
   cursor: pointer;
 }
 .info {
-  margin: 10px 0px 28px 0px;
+  margin: 10px 0px 0px 0px;
 }
 .col {
   text-align: center;
@@ -120,7 +120,7 @@ button {
 }
 .middle {
   position: relative;
-  right: 20px;
+  right: 40px;
 }
 .weather {
   position: relative;
@@ -131,8 +131,8 @@ button {
   color: #204051;
   font-size: 150px;
   position: relative;
-  top: 43px;
-  left: 47px;
+  top: 35px;
+  left: 12px;
   fill: #204051;
 }
 .filterIcon {
@@ -165,4 +165,7 @@ button {
 }
 .condition::first-letter {
   text-transform: capitalize;
+}
+.start {
+  margin: 8px 0px 0px 0px;
 }
