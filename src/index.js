@@ -69,8 +69,13 @@ function changeWeather(name, temp, humid, conditions, windS, weatherPic) {
   let currentPic = document.querySelector("#main-icon");
   currentPic.setAttribute("src", `src/images/${weatherPic}.svg`);
 }
-function cityTime(time) {
-  let cityTime = new Date(time * 1000);
+function cityTime(time, timezone) {
+  let now = new Date();
+  let yourZone = now.getTimezoneOffset();
+  let yourTime = Date.parse(now);
+  let newTime =
+    time * 1000 + timezone * 1000 - yourZone * 60 * 1000 + 12 * 60 * 60 * 1000;
+  let cityTime = new Date(newTime);
 
   // Day of Week
   let daily = [
@@ -112,6 +117,11 @@ function cityTime(time) {
   minute.innerHTML = correctMinutes(minutes);
   pm.innerHTML = afternoon;
 }
+function isitWindy(temp, wind, pic) {
+  console.log(temp);
+  console.log(wind);
+  console.log(pic);
+}
 function currentWeather(response) {
   let cityName = response.data.name;
   temperatures[0] = response.data.main.temp;
@@ -119,6 +129,7 @@ function currentWeather(response) {
   let outsideView = response.data.weather[0].description;
   windSpeed = response.data.wind.speed;
   timestamp = response.data.dt;
+  let timezone = response.data.timezone;
   let weatherPic = response.data.weather[0].icon;
   changeWeather(
     cityName,
@@ -128,7 +139,8 @@ function currentWeather(response) {
     windSpeed,
     weatherPic
   );
-  cityTime(timestamp);
+  isitWindy(temperatures[0], windSpeed, weatherPic);
+  cityTime(timestamp, timezone);
 }
 function changeDailyFore(temperatures, weatherIDs) {
   for (let j = 1; j < 6; j++) {
@@ -197,7 +209,7 @@ function yourCity() {
 }
 // Current Date
 let timestamp = null;
-
+let outsideCondition = document.querySelector("h5");
 //null temp values
 let temperatures = [null, 11, 15, 18, 19, 32];
 let weatherIDs = [null, 11, 12, 13, 14, 15];
@@ -211,7 +223,6 @@ changetoC.addEventListener("click", toCel);
 let yourCurrentCity = document.querySelector("#your-city");
 yourCurrentCity.addEventListener("click", yourCity);
 
-navigator.geolocation.getCurrentPosition(showPosition);
 weatherLookup("Calgary");
 locationPlace.addEventListener("submit", findCity);
 let placeLocation = document.querySelector("#location-input");
@@ -224,6 +235,4 @@ placeLocation.addEventListener("keypress", function (e) {
 // Things to do
 
 // Update Date/Time for city Time zone
-//main icon change
-// forecasting icon change
 // Javascript for weather saying
