@@ -117,11 +117,6 @@ function cityTime(time, timezone) {
   minute.innerHTML = correctMinutes(minutes);
   pm.innerHTML = afternoon;
 }
-function isitWindy(temp, wind, pic) {
-  console.log(temp);
-  console.log(wind);
-  console.log(pic);
-}
 function currentWeather(response) {
   let cityName = response.data.name;
   temperatures[0] = response.data.main.temp;
@@ -139,7 +134,6 @@ function currentWeather(response) {
     windSpeed,
     weatherPic
   );
-  isitWindy(temperatures[0], windSpeed, weatherPic);
   cityTime(timestamp, timezone);
 }
 function changeDailyFore(temperatures, weatherIDs) {
