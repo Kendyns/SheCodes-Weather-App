@@ -170,7 +170,7 @@ function multiForecast(response) {
   } else {
     mI5 = mI1 + 32;
   }
-
+  mI1 = Math.round(mI1);
   temperatures[1] = response.data.list[mI1].main.temp_max;
   temperatures[2] = response.data.list[mI2].main.temp_max;
   temperatures[3] = response.data.list[mI3].main.temp_max;
